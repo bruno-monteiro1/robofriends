@@ -36,10 +36,6 @@ class App extends Component {
 			return robot.name.toLowerCase().includes(searchField.toLowerCase());
 		});
 
-		console.log(this.state.robots);
-		console.log({robots});
-		console.log(filteredRobots);
-
 		return !robots.length ?
 		<h1>Loading...</h1> :
 		(
