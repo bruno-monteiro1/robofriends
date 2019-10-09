@@ -1,22 +1,35 @@
-import React, { Component } from 'react'
-import CardList from '../Components/CardList'
-import SearchBox from '../Components/SearchBox'
-import './App.css'
-import Scroll from '../Components/Scroll'
-import ErrorBoundary from '../Components/ErrorBoundary'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
+import './App.css';
+import Scroll from '../components/Scroll';
+import ErrorBoundary from '../components/ErrorBoundary';
 
+import { setSearchField } from '../actions';
+
+
+const mapStateToProps = state => {
+	return {
+		searchField: state.searchField
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+	}
+}
 
 class App extends Component {
 	constructor(){
 		super();
 		this.state = {
 			robots: [],
-			searchField: ''
 		}
 	}
 
 	componentDidMount(){
-		console.log(this.state.robots);
 		fetch('https://jsonplaceholder.typicode.com/users').then(response =>{
 			return response.json();
 		})
@@ -25,13 +38,10 @@ class App extends Component {
 		});
 	}
 
-	onSearchChange = (evt) => {
-		this.setState({ searchField: evt.target.value })
-	}
-
 	render(){
-		const { robots, searchField } = this.state;
-		
+		const { robots } = this.state;
+		const { searchField, onSearchChange } = this.props;
+
 		const filteredRobots = robots.filter(robot => {
 			return robot.name.toLowerCase().includes(searchField.toLowerCase());
 		});
@@ -41,10 +51,10 @@ class App extends Component {
 		(
 			<div className='tc'>
 				<h1 className='f1'>RoboFriends</h1>
-				<SearchBox searchChange={this.onSearchChange}/>
+				<SearchBox searchChange={ onSearchChange }/>
 				<Scroll>
 					<ErrorBoundary>
-						<CardList robots={filteredRobots} />
+						<CardList robots={ filteredRobots } />
 					</ErrorBoundary>
 				</Scroll>
 		
@@ -56,4 +66,8 @@ class App extends Component {
 }
 
 
+<<<<<<< HEAD
 export default App
+=======
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+>>>>>>> redux
