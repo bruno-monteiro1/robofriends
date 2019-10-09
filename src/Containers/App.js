@@ -66,8 +66,4 @@ class App extends Component {
 }
 
 
-<<<<<<< HEAD
-export default App
-=======
 export default connect(mapStateToProps, mapDispatchToProps)(App)
->>>>>>> redux
