@@ -30,8 +30,6 @@ export const App = () => {
     setFilteredRobots(filteredRobots);
   };
 
-  console.log(filteredRobots)
-
   return !robots.length ? (
     <h1>Loading...</h1>
   ) : (
