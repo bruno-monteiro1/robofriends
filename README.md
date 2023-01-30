@@ -1,3 +1,3 @@
-Demonstration of React and Redux in action.
+Demonstration of React.
 
 https://bruno-monteiro1.github.io/robofriends/
